@@ -1,0 +1,53 @@
+body
+{
+    background: #666;
+}
+
+#game
+{
+    margin: 0.5%;
+
+}
+
+nav
+{
+
+    display:inline-block;
+    width:10%;
+}
+nav ul
+{
+    padding:0;
+    text-align:right;
+}
+nav li
+{
+    list-style-type:none;
+    padding: 5px;
+    padding-right: 10px;
+}
+
+nav .active
+{
+    background: #eef;
+}
+
+#content
+{
+
+    background: #eef;
+    display:inline-block;
+    vertical-align: top;
+    width:79%;
+    padding: 5px;
+    
+}
+
+#status 
+{
+}
+
+#viewport
+{
+    background: #666;
+
