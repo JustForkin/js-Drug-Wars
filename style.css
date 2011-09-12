@@ -93,6 +93,11 @@ nav .active
     display:inline-block;
 }
 
+#viewport #inventory
+{
+    float:right;
+}
+
 .current_page
 {
     display:block !important;

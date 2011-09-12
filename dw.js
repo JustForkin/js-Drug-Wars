@@ -58,19 +58,58 @@ var location_map = {"apple_orchard":apple_orchard, "orange_grove":orange_grove};
 
 
 function refresh_view(){
+    /* status bar */
     $("#player_name").text(player.name);
     $("#money").text(player.money);
     $("#days_left").text(player.days_left);
+
     $("#debt").text(player.debt);
+
+    /* inventory box */
+    $("#inventory span").each(function(){
+        $(this).text(player.inventory[$(this).attr("class")]);
+    });
+    
 }
 
 function move_to(place){
     player.advance_day();
     place = location_map[place];
     price_list = place.get_price_list();
+    player.price_list = price_list;
+
     $("#current_location").text(place.name);
     $("#apples .price").text(price_list.apples);
     $("#oranges .price").text(price_list.oranges);
+}
+
+function buy_button(item){
+    if (item in player.price_list){ //this will just straight up crash, meh.
+        price = player.price_list[item];
+        max_items = Math.round(player.money / price);
+        player.money = player.money - (max_items*price);  // pay moneys
+        player.inventory[item] = player.inventory[item] + max_items;  // get items
+        refresh_view();
+
+    }
+    else{
+        alert("GO SOMEWHERE FIRST DUH");
+    }
+}
+
+function sell_button(item){
+    //sell whole inventory
+    if (item in player.price_list){ //this will just straight up crash, meh.
+        price = player.price_list[item];
+        items = player.inventory[item];
+        profit = items*price;
+        player.inventory[item] = 0;
+        player.money = player.money + profit;
+        refresh_view();
+    }
+    else{
+        alert("GO SOMEWHERE FIRST DUH");
+    }
 }
 
 function render_new_page(caller_id){
@@ -101,6 +140,20 @@ $(document).ready(function(){
     $("#locations li a").each(function(i){
         $(this).click(function(eventObject){
             move_to($(this).attr("id"));
+        });
+    });
+
+    /* adding buy buttons */
+    $("#price_list li a").each(function(i){
+        $(this).click(function(eventObject){
+            buy_button($(this).attr("id"));
+        });
+    });
+
+    /* adding sell buttons */
+    $("#sell_list li a").each(function(i){
+        $(this).click(function(eventObject){
+            sell_button($(this).attr("id"));
         });
     });
     
