@@ -24,21 +24,67 @@
         </nav><div id="content">
             <div id="status">
                 <span>
-                    Name <span id="player-name"></span>
+                    Name <span id="player_name" class="status_data"></span>
                 </span>
                 <span>
-                    Money<span id="money"></span>
+                    Money<span id="money" class="status_data"></span>
                 </span>
                 <span>
-                    Day<span id="day"></span>
+                    Days Left<span id="days_left" class="status_data"></span>
                 </span>
                 
             </div>
 
             <div id="viewport">
-                <div id="home_page" class="current_page">Home</div>
-                <div  id="work_page">Work</div>
-                <div id="loan_shark_page">Loan Shark</div>
+                <div id="home_page" class="page current_page">
+                    <h2>Home</h2>
+                    <ul>
+                        <li>
+                            <a href="#" onClick="javascript:player.advance_day();refresh_view();">Advance Day</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div  id="work_page" class="page">
+                    <h3> Work </h3>
+                    <h2 id="current_location"> Go somewhere, buy something</h2>
+                    <div id="price_list">
+                            <ul>
+                                <li>
+                                    <a href="#" id="apples" onClick="javascript:buy_button();">Apples
+                                        <div class="price"></div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#" id="oranges" onClick="javascript:buy_button();">Oranges
+                                        <div class="price"></div>
+                                    </a>
+                                </li>
+                            </ul>
+                    </div>
+                    <div id="locations">
+                        <h2>Where to..?</h2>
+                            <ul>
+                                <li>
+                                    <a href="#" id="apple_orchard">Apple Orchard</a>
+                                </li>
+                                <li>
+                                    <a href="#" id="orange_grove">Orange Grove</a>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
+
+                <div id="loan_shark_page" class="page">
+                    <h2> Loan Shark</h2>
+                    <p> You need to pay off your debts if you value your knee caps. </p>
+                    <p> You owe: <span id="debt"></span></p>
+                    <form>
+                    </form>
+                </div>
+
             </div>
             
         </div>

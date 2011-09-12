@@ -1,6 +1,12 @@
 body
 {
     background: #666;
+    font-family:sans-serif;
+}
+h1,h2,h3
+{
+    line-height: 1em;
+    margin:0;
 }
 
 #game
@@ -45,6 +51,12 @@ nav .active
 
 #status 
 {
+    text-align:right;
+}
+
+#status .status_data
+{
+    background: #f6f;
 }
 
 #viewport
@@ -52,10 +64,33 @@ nav .active
     background: #888;
 }
 
-#viewport div
+#viewport .page
 {
     display:none;
     min-height: 150px;
+}
+
+#viewport ul
+{
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+
+#viewport ul li
+{
+    display:inline-block;
+    margin:5px;
+}
+
+#viewport ul li a,
+#viewport ul li a:visited
+{
+    text-decoration:none;
+    color:white;
+    padding:1em;
+    background:blue;
+    display:inline-block;
 }
 
 .current_page

@@ -1,16 +1,94 @@
+/* Conrad Dean
+ *
+ * Drug Wars remake
+ * requires: jquery 1.5
+ */
+
+function Place_Object(name){
+    this.name = name;
+    this.price_differences = {apples: 1, oranges : 1};
+    this.get_price_list = function(){
+        apples_price = item_prices.apples * this.price_differences.apples;
+        oranges_price = item_prices.oranges * this.price_differences.oranges;
+
+        apples_price= Math.round(apples_price);
+        oranges_price= Math.round(oranges_price);
+
+        return {apples:apples_price, oranges:oranges_price};
+    };
+};
+
+
+function Player_Object()
+{
+    this.days_left = 30;
+    this.name = "Conrad";
+    this.inventory = {apples : 0, oranges: 0};
+    this.money = 200;
+    this.debt = 200;
+    this.daily_interest = 0.1;
+
+    this.advance_day = function(){
+        if(this.days_left > 0){
+            this.days_left = this.days_left - 1;
+            this.debt = this.debt*(1+this.daily_interest);
+            /* round debt */
+            this.debt = Math.round(this.debt);
+        }
+        else{
+            game_end();
+        }
+    };
+}
+
+
+/* Game Data */
+
+var player = new Player_Object();
+
+var item_prices = {apples : 10, oranges : 100};
+
+var apple_orchard = new Place_Object("Apple Orchard");
+apple_orchard.price_differences = {apples: .5, oranges: 2};
+var orange_grove = new Place_Object("Orange Grove");
+orange_grove.price_differences = {apples: 2, oranges: .5};
+
+var location_map = {"apple_orchard":apple_orchard, "orange_grove":orange_grove};
+
+
+
+function refresh_view(){
+    $("#player_name").text(player.name);
+    $("#money").text(player.money);
+    $("#days_left").text(player.days_left);
+    $("#debt").text(player.debt);
+}
+
+function move_to(place){
+    player.advance_day();
+    place = location_map[place];
+    price_list = place.get_price_list();
+    $("#current_location").text(place.name);
+    $("#apples .price").text(price_list.apples);
+    $("#oranges .price").text(price_list.oranges);
+}
+
 function render_new_page(caller_id){
     /* Turn off the old selected item to turn on the new one*/
     $(".active").removeClass("active");
     $("#"+caller_id).addClass("active");
+
     /* Un-render the current page and render the new one from the
      * caller_id
      */
-    //$(".current_page").removeClass("current_page");
-    //$("#"+caller_id+"_page").addClass("current_page");
+    $(".current_page").removeClass("current_page");
+    $("#"+caller_id+"_page").addClass("current_page");
 }
 
 $(document).ready(function(){
     //add click stuff to ui
+
+    /* adding page swapping links */
     
     $("nav li").each(function(i){
         $(this).click(function(eventObject){
@@ -18,6 +96,16 @@ $(document).ready(function(){
         });
         $(this).css("cursor","pointer");
     });
+
+    /* adding location movement links */
+    $("#locations li a").each(function(i){
+        $(this).click(function(eventObject){
+            move_to($(this).attr("id"));
+        });
+    });
     
+
+    /* first refresh */
+    refresh_view();
 
 });
