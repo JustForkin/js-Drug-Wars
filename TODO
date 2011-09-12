@@ -1,0 +1,22 @@
+Implement loanshark functionality
+
+program game end
+
+
+--- feature complete ---
+
+
+add "depth to the game: more items and locations
+
+    refactor code to make adding locations/drugs easier
+
+
+Make game harder -- add chance
+    implement price fluxuators- noisemap on top of the base changes for a location.
+
+    random events?
+
+change to be able to buy small amounts of goods instead of maxing out -- the noise will make people need to have fine grained control over stuff
+
+
+
