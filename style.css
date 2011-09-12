@@ -49,5 +49,16 @@ nav .active
 
 #viewport
 {
-    background: #666;
+    background: #888;
+}
 
+#viewport div
+{
+    display:none;
+    min-height: 150px;
+}
+
+.current_page
+{
+    display:block !important;
+}
