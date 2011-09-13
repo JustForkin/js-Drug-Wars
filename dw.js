@@ -11,8 +11,8 @@ function Place_Object(name){
         apples_price = item_prices.apples * this.price_differences.apples;
         oranges_price = item_prices.oranges * this.price_differences.oranges;
 
-        apples_price= Math.round(apples_price);
-        oranges_price= Math.round(oranges_price);
+        apples_price= Math.floor(apples_price);
+        oranges_price= Math.floor(oranges_price);
 
         return {apples:apples_price, oranges:oranges_price};
     };
@@ -33,7 +33,7 @@ function Player_Object()
             this.days_left = this.days_left - 1;
             this.debt = this.debt*(1+this.daily_interest);
             /* round debt */
-            this.debt = Math.round(this.debt);
+            this.debt = Math.floor(this.debt);
         }
         else{
             game_end();
@@ -86,7 +86,7 @@ function move_to(place){
 function buy_button(item){
     if (item in player.price_list){ //this will just straight up crash, meh.
         price = player.price_list[item];
-        max_items = Math.round(player.money / price);
+        max_items = Math.floor(player.money / price);
         player.money = player.money - (max_items*price);  // pay moneys
         player.inventory[item] = player.inventory[item] + max_items;  // get items
         refresh_view();
@@ -110,6 +110,37 @@ function sell_button(item){
     else{
         alert("GO SOMEWHERE FIRST DUH");
     }
+}
+
+function submit_loan_shark_request(){
+    deposit = parseInt($("#loan_shark_deposit").attr("value"));
+    withdraw = parseInt($("#loan_shark_withdraw").attr("value"));
+
+    if (deposit >= 0){
+        player.money = player.money - deposit;
+        player.debt = player.debt - deposit;
+    }
+    else{
+        alert(deposit+" is not a number you can deposit with.");
+    }
+
+    if (withdraw >= 0){
+        player.money = player.money + withdraw;
+        player.debt = player.debt + withdraw;
+    }
+    else{
+        alert(withdraw+" is not a number you can withdraw with.");
+    }
+
+    player.money = player.money < 0 ? 0 : player.money;
+    player.debt = player.debt < 0 ? 0 : player.debt;
+
+    $("#loan_shark_deposit").attr("value",0);
+    $("#loan_shark_withdraw").attr("value",0);
+
+    refresh_view();
+
+
 }
 
 function render_new_page(caller_id){
