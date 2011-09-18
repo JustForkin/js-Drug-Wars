@@ -9,6 +9,11 @@ h1,h2,h3
     margin:0;
 }
 
+h2
+{
+    font-size: 2em;
+}
+
 #game
 {
     margin: 0.5%;
@@ -111,3 +116,53 @@ nav .active
 {
     display:block;
 }
+
+#the_score
+{
+    font-size: 22px;
+}
+
+#game_end
+{
+    display:none;
+    text-align:center;
+    background: #eef;
+    margin:2em;
+    padding:1em;
+}
+
+.money_end
+{
+    color:green;
+}
+
+.debt_end
+{
+    color:red;
+}
+
+.score_end
+{
+    color:blue;
+}
+
+.money_end,
+.debt_end,
+.score_end
+{
+    font-size:2em;
+    line-height: 0;
+}
+
+/*
+#game
+{
+    display:none;
+}
+
+#game_end
+{
+    display:block;
+}
+
+*/

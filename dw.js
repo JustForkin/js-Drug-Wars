@@ -156,6 +156,23 @@ function render_new_page(caller_id){
     $("#"+caller_id+"_page").addClass("current_page");
 }
 
+function game_end(){
+    /* calculate score and display end page */
+
+    /* add score info to page */
+    $(".money_end").text(player.money);
+    $(".debt_end").text(player.debt);
+    score = player.money-3*player.debt;
+    $(".score_end").text(score);
+    /* conditional coloring of score */
+    score_color = (score > 0)? "green" : "red";
+    $(".score_end").css("color",score_color);
+
+    /* show game end */
+    $("#game").css("display","none");
+    $("#game_end").css("display","block");
+}
+
 $(document).ready(function(){
     //add click stuff to ui
 
