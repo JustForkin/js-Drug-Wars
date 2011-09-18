@@ -98,7 +98,7 @@ nav .active
     float:right;
 }
 
-.current_page
+#viewport .current_page
 {
-    display:block !important;
+    display:block;
 }
