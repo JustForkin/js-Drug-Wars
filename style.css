@@ -26,11 +26,20 @@ nav ul
     padding:0;
     text-align:right;
 }
-nav li
+
+nav a
 {
+    display:block;
+    text-decoration: none;
+    color: black;
     list-style-type:none;
     padding: 5px;
     padding-right: 10px;
+}
+
+nav a:focus
+{
+    font-size: 1.08em;
 }
 
 nav .active

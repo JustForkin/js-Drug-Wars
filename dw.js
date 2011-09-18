@@ -57,6 +57,7 @@ var location_map = {"apple_orchard":apple_orchard, "orange_grove":orange_grove};
 
 
 
+
 function refresh_view(){
     /* status bar */
     $("#player_name").text(player.name);
@@ -158,9 +159,9 @@ function render_new_page(caller_id){
 $(document).ready(function(){
     //add click stuff to ui
 
-    /* adding page swapping links */
+    /* adding page buttons */
     
-    $("nav li").each(function(i){
+    $("nav a").each(function(i){
         $(this).click(function(eventObject){
             render_new_page($(this).attr("id"));
         });
